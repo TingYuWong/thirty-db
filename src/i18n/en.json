@@ -1,0 +1,17 @@
+{
+  "greeting": "Hello!",
+  "welcome": "Welcome to the site",
+  "switchLang": "Switch Language",
+  "home": {
+    "title": "Welcome to the site"
+  },
+  "podcast": {
+    "title": "Let's speak at 30 db!"
+  },
+  "fortuneCookie": {
+    "title": "Roll the dice!"
+  },
+  "notFound": {
+    "title": "There's nothing to be found！"
+  }
+}

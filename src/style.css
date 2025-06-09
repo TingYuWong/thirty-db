@@ -1,0 +1,21 @@
+@layer reset, theme, components;
+
+@import 'modern-css-reset' layer(reset);
+
+@layer theme {
+  :root {
+    /* 粉紫及粉紅 */
+    --brand-color: #c6a5ff;
+  }
+
+  body {
+    font-family: system-ui, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: #ffe4f3;
+  }
+}
+
+/* 元件樣式或 utility 再放 components layer */
+@layer components {
+}

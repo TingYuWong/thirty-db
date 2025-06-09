@@ -1,0 +1,17 @@
+{
+  "greeting": "你好！",
+  "welcome": "歡迎來到本站",
+  "switchLang": "切換語言",
+  "home": {
+    "title": "歡迎來到本站"
+  },
+  "podcast": {
+    "title": "噓！最高品質！30db！"
+  },
+  "fortuneCookie": {
+    "title": "幸運餅乾！"
+  },
+  "notFound": {
+    "title": "這裡什麼都沒有！"
+  }
+}
