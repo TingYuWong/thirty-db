@@ -3,7 +3,10 @@
   "welcome": "Welcome to the site",
   "switchLang": "Switch Language",
   "home": {
-    "title": "Welcome to the site"
+    "title": "Welcome to the site",
+    "hero": {
+      "title": "Her 30 db"
+    }
   },
   "podcast": {
     "title": "Let's speak at 30 db!"

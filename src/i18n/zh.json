@@ -3,7 +3,10 @@
   "welcome": "歡迎來到本站",
   "switchLang": "切換語言",
   "home": {
-    "title": "歡迎來到本站"
+    "title": "歡迎來到本站",
+    "hero": {
+      "title": "她的30分貝"
+    }
   },
   "podcast": {
     "title": "噓！最高品質！30db！"
