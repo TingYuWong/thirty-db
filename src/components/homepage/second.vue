@@ -1,7 +1,6 @@
 <template>
   <div class="character-wrap">
     <CharacterCard
-      ref="itemEl"
       :key="currentItem.name"
       :image="currentItem.image"
       :name="currentItem.name"
@@ -23,8 +22,7 @@ import Guardian from '@/assets/characters/6.png'
 import Summer from '@/assets/characters/5.png'
 import Ex from '@/assets/characters/3.png'
 import BadFriend from '@/assets/characters/2.png'
-import { ref, onMounted } from 'vue'
-import { gsap } from 'gsap'
+import { ref, onMounted, computed } from 'vue'
 
 const emit = defineEmits<{
   (e: 'next-section'): void
@@ -70,7 +68,7 @@ const characters = [
   },
   {
     name: 'Helen',
-    description: '專業幹練，事業心強，比起同事及下屬的感受，更在意眼前的工作是否能順利完成',
+    description: '專業幹練，比起同事及下屬的感受，更在意眼前的工作是否能順利完成',
     image: Helen,
   },
   {
@@ -85,22 +83,19 @@ const characters = [
   },
 ]
 
-const currentItem = ref({ name: '', image: '', description: '' })
-const itemEl = ref<HTMLElement | null>(null)
+const index = ref(0)
+const currentItem = computed(() => characters[index.value])
+let intervalTimer = null
 
 onMounted(() => {
-  const tl = gsap.timeline()
-
-  characters.forEach((character, index) => {
-    tl.call(() => {
-      currentItem.value = character
-    })
-      .to(itemEl.value, { opacity: 1, duration: 1 }) // fade in
-      .to({}, { duration: 3.5 }) // stay visible
-      .to(itemEl.value, { opacity: 0, duration: 1 }) // fade out
-  })
-
-  tl.call(() => emit('next-section')) // 進入主頁
+  intervalTimer = setInterval(() => {
+    if (index.value >= characters.length - 1) {
+      clearInterval(intervalTimer)
+      emit('next-section')
+      return
+    }
+    index.value++
+  }, 6500)
 })
 </script>
 
@@ -116,5 +111,6 @@ onMounted(() => {
   background-blend-mode: color-dodge;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 </style>

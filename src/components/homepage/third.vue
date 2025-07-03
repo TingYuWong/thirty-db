@@ -30,10 +30,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import lottie from 'lottie-web'
 import { gsap } from 'gsap'
+
+const emit = defineEmits<{
+  (e: 'next-section'): void
+}>()
 
 const fortunes = [
   '好運將降臨在你身上。',
@@ -47,25 +51,11 @@ const fortunes = [
   '幸福往往在意想不到的角落出現。',
   '善良會讓世界更美好。',
   '相信直覺，它正在指引你正確的方向。',
-  '每一次挑戰都是一次成長。',
   '你的夢想值得被實現。',
-  '今日播下的種子，明日必將開花結果。',
-  '成功離你越來越近了。',
-  '知足常樂，心安即福。',
-  '朋友會帶給你意想不到的幫助。',
   '不要害怕改變，那是新生的開始。',
-  '你擁有無比的智慧與勇氣。',
-  '明天會比今天更好。',
-  '小小善舉會產生大大的影響。',
-  '愛與被愛讓人生更豐盛。',
   '你的堅持將打動他人。',
-  '新的一扇門即將為你打開。',
-  '保持正念，吸引正能量。',
   '冒險會帶來奇妙的收穫。',
   '你將遇見值得信賴的夥伴。',
-  '困難是成功的墊腳石。',
-  '心懷感恩，福氣自來。',
-  '幸福其實就在當下。',
 ]
 
 const isOpened = ref(false)
@@ -77,7 +67,7 @@ let hasPlayed = false
 const fireworkGroups = reactive([])
 const colorOptions = ['#f0cf65', '#EC368D', '#f0a1ec', '#EB6424', '#ffffff']
 
-function triggerFirework(x, y) {
+const triggerFirework = (x, y) => {
   const particles = Array.from({ length: 25 }, () => {
     const angle = Math.random() * Math.PI * 2
     const radius = 80 + Math.random() * 40
@@ -97,7 +87,7 @@ function triggerFirework(x, y) {
   fireworkGroups.push({ id, x, y, particles })
 }
 
-function animateParticle(el, particle, groupId) {
+const animateParticle = (el, particle, groupId) => {
   if (!el) return
   gsap.to(el, {
     x: particle.dx,
@@ -125,13 +115,14 @@ onMounted(() => {
   animationInstance.goToAndStop(0, true)
 })
 
-function handleClick(event) {
+const handleClick = event => {
   triggerFirework(event.clientX, event.clientY)
   if (hasPlayed || !animationInstance) return
   hasPlayed = true
   animationInstance.play()
   animationInstance.addEventListener('complete', () => {
     isOpened.value = true
+    setTimeout(() => emit('next-section'), 3000)
   })
 }
 </script>
@@ -178,7 +169,7 @@ function handleClick(event) {
 
 .lottie-container {
   width: 50%;
-  min-width: 400px;
+  min-width: 350px;
   pointer-events: none;
   margin-left: 2rem;
 }

@@ -13,32 +13,12 @@
     font-optical-sizing: auto;
   }
 
-  /* body {
-    font-family: system-ui, sans-serif;
-    color: #333;
-    line-height: 1.6;
-    background: #ffe4f3;
-  } */
-
-  /* body {
-    margin: 0;
-    background: linear-gradient(135deg, #fdf1f1, #f6e3ff, #e0f0ff);
-    background-size: 200% 200%;
-    animation: bgMove 10s ease-in-out infinite;
-    position: relative;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42mNgoCX4z0AEMBgEGbVgGFDAkRiXAhQDYmDKGQRig8YBAAmUJ4ACowQTzAwMEADflS9Zs+fwOQAAAABJRU5ErkJggg==');
-    opacity: 0.15;
-    z-index: 0;
-  } */
-
   body {
+    background:
+      radial-gradient(129% 99% at 112% 85%, rgb(254, 255, 220) 20%, rgb(255, 179, 158) 90%),
+      url('@/assets/noise.png');
+    background-blend-mode: color-dodge;
+    overflow: hidden;
   }
 }
 

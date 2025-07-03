@@ -9,12 +9,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, nextTick, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+gsap.registerPlugin(SplitText)
 
 const props = defineProps({
   image: String,
@@ -26,22 +25,36 @@ const cardRef = ref(null)
 const nameRef = ref(null)
 const descriptionRef = ref(null)
 
-onMounted(async () => {
+let splitInstances = []
+let timeline
+
+const cleanup = () => {
+  timeline?.kill()
+  splitInstances.forEach(split => split.revert())
+  splitInstances = []
+}
+
+const playAnimation = async () => {
+  cleanup()
+
   await document.fonts.ready
+  await nextTick()
 
   const names = new SplitText(nameRef.value, { type: 'chars' })
   const description = new SplitText(descriptionRef.value, { type: 'chars' })
 
-  const tl = gsap.timeline({})
+  splitInstances = [names, description]
 
-  tl.from(cardRef.value, {
+  timeline = gsap.timeline()
+
+  timeline.from(cardRef.value, {
     x: [100, -100][Math.floor(Math.random() * 2)],
     opacity: 0,
-    duration: 1,
+    duration: 1.5,
     ease: 'power2.out',
   })
 
-  tl.from(
+  timeline.from(
     names.chars,
     {
       y: 20,
@@ -53,12 +66,38 @@ onMounted(async () => {
     '-=0.2'
   )
 
-  tl.from(description.chars, {
-    opacity: 0,
-    stagger: 0.08,
-    duration: 0.6,
-    ease: 'power2.out',
-  })
+  timeline.from(
+    description.chars,
+    {
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: 'power2.out',
+    },
+    '-=0.2'
+  )
+
+  timeline.to(
+    cardRef.value,
+    {
+      opacity: 0,
+      duration: 1,
+      ease: 'power2.inOut',
+    },
+    '+=0.1'
+  )
+}
+
+watch(
+  () => props.image,
+  () => {
+    playAnimation()
+  },
+  { immediate: true }
+) // 頁面初次也會跑一次
+
+onBeforeUnmount(() => {
+  cleanup()
 })
 </script>
 
@@ -69,6 +108,7 @@ onMounted(async () => {
   justify-content: center;
   gap: 2rem;
   height: 100vh;
+  overflow: hidden;
 }
 
 .character-image {
@@ -78,11 +118,10 @@ onMounted(async () => {
   object-fit: cover;
 }
 
-.morph-bg {
-}
-
 .character-info {
+  color: #fff;
   width: 500px;
+  overflow: hidden;
 }
 
 .character-name {
