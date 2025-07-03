@@ -12,9 +12,13 @@
         <defs>
           <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stop-color="#FFFFFF" />
-            <stop offset="100%" stop-color="#D6A4F2" />
+            <stop offset="100%" stop-color="#ff9eb5" />
           </linearGradient>
         </defs>
+        <!-- <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffc2a1" />
+          <stop offset="100%" stop-color="#ff9eb5" />
+        </linearGradient> -->
 
         <path
           ref="pathRef"
@@ -117,7 +121,7 @@ svg {
   height: 4vw;
   min-width: 30px;
   min-height: 30px;
-  background: radial-gradient(circle at 20% 20%, rgb(255, 147, 199), rgb(151, 71, 255));
+  background: radial-gradient(circle at 20% 20%, #ffb7db, #ecc7ff);
   border-radius: 50%;
   position: absolute;
   top: 0;

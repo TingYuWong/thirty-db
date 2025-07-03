@@ -1,10 +1,8 @@
 <template>
   <div class="credit-wrapper">
-    <div class="credit-mask">
-      <div class="credit-content" ref="creditContent">
-        <div v-for="(item, index) in credits" :key="index" class="credit-line">
-          {{ `${item.role}: ${item.names.join(', ')}` }}
-        </div>
+    <div class="credit-content" ref="creditContent">
+      <div v-for="(item, index) in credits" :key="index" class="credit-line">
+        {{ `${item.role}: ${item.names.join(', ')}` }}
       </div>
     </div>
   </div>
@@ -46,45 +44,42 @@ const credits = [
 
 onMounted(() => {
   const height = creditContent.value.scrollHeight
-  gsap.fromTo(
-    creditContent.value,
-    { y: '100%' },
-    {
-      y: `-${height}px`,
-      duration: 20,
-      ease: 'none',
-      repeat: -1, // 無限滾動
-    }
-  )
+  // gsap.fromTo(
+  //   creditContent.value,
+  //   { y: '100%' },
+  //   {
+  //     y: `-${height}px`,
+  //     duration: 20,
+  //     ease: 'none',
+  //     repeat: -1, // 無限滾動
+  //   }
+  // )
 })
 </script>
 
 <style scoped>
 .credit-wrapper {
+  width: 100%;
   height: 100vh;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
   font-family: 'Courier New', Courier, monospace;
-}
-
-.credit-mask {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
+  padding: 2rem;
 }
 
 .credit-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   line-height: 2.5;
+  word-break: break-all;
 }
 
 .credit-line {
-  white-space: nowrap;
+  word-break: break-all;
+
+  /* white-space: nowrap; */
 }
 </style>

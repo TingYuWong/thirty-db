@@ -26,7 +26,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const containerRef = ref(null)
 const layerRefs = []
-const heartSrc = new URL('@/assets/smoother-element/white-heart.png', import.meta.url).href
+const heartSrc = new URL('@/assets/heart-two.png', import.meta.url).href
 
 const layers = [
   { speed: 0.1, count: 25 },

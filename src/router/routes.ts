@@ -1,10 +1,18 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
+  // {
+  //   path: '/',
+  //   name: 'LandingPage',
+  //   component: () => import('@/views/landing-page.vue'), // lazy load
+  //   meta: {
+  //     title: 'home.title',
+  //   },
+  // },
   {
     path: '/',
-    name: 'LandingPage',
-    component: () => import('@/views/landing-page.vue'), // lazy load
+    name: 'HomePage',
+    component: () => import('@/views/homepage.vue'), // lazy load
     meta: {
       title: 'home.title',
     },

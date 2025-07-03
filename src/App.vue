@@ -16,10 +16,10 @@ const switchLang = () => {
 </script>
 
 <template>
-  <div class="app__switch-lang-container" @click="switchLang">
+  <!-- <div class="app__switch-lang-container" @click="switchLang">
     <GlobeAltIcon class="app__switch-lang-icon" />
     <div>{{ locale }}</div>
-  </div>
+  </div> -->
   <router-view />
 </template>
 

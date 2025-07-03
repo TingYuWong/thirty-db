@@ -149,36 +149,14 @@ function handleClick(event) {
   user-select: none;
   outline: none;
   padding: 0;
-
-  background-image: linear-gradient(-45deg, #ffeeba, #ffc3c4, #ffbe8b);
-  background-repeat: repeat, no-repeat;
-  background-size:
-    auto,
-    400% 400%;
-  background-position: center, center;
-  animation: gradientFlow 12s ease infinite;
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position:
-      center,
-      0% 50%;
-  }
-  50% {
-    background-position:
-      center,
-      100% 50%;
-  }
-  100% {
-    background-position:
-      center,
-      0% 50%;
-  }
+  background:
+    radial-gradient(129% 99% at 112% 85%, rgb(223, 220, 255) 20%, rgb(255, 179, 158) 90%),
+    url('@/assets/noise.png');
+  background-blend-mode: color-dodge;
 }
 
 .fortune-strip {
-  width: 30vw;
+  width: 70vw;
   padding: 1rem;
   background-color: #fff9e1;
   border-radius: 14px;
@@ -200,7 +178,7 @@ function handleClick(event) {
 
 .lottie-container {
   width: 50%;
-  min-width: 300px;
+  min-width: 400px;
   pointer-events: none;
   margin-left: 2rem;
 }

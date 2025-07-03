@@ -1,199 +1,110 @@
 <template>
-  <div class="profile-page">
-    <section ref="profileRef" class="profile">
-      <div
-        v-if="characters_front.length !== 0 && characters_back.length !== 0"
-        class="profile__list"
-        ref="cardGroupRef"
-      >
-        <div v-for="(person, i) in characters_front" :key="i" class="profile__card">
-          <div
-            class="profile__card-inner"
-            :class="{ 'profile__card-inner--flipped': flippedMap[person.id] }"
-            @click="() => handleFlipped(person.id)"
-          >
-            <!-- 正面 -->
-            <div class="profile__face profile__face--front">
-              <img class="profile__image" :src="person.image" :alt="person.name" />
-              <div class="profile__name">{{ person.name }}</div>
-              <div class="profile__content">
-                <div>{{ `MBTI：${person.mbti}` }}</div>
-                <div>{{ `Motto：${person.motto}` }}</div>
-                <div>{{ `Habit：${person.habit}` }}</div>
-              </div>
-            </div>
-
-            <!-- 背面 -->
-            <div class="profile__face profile__face--back">
-              <img
-                class="profile__image"
-                :src="characters_back[i].image"
-                :alt="characters_back[i].name"
-              />
-              <div class="profile__name">{{ characters_back[i].name }}</div>
-              <div class="profile__content">
-                <div>{{ `MBTI：${characters_back[i].mbti}` }}</div>
-                <div>{{ `Motto：${characters_back[i].motto}` }}</div>
-                <div>{{ `Habit：${characters_back[i].habit}` }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  <section class="profile">
+    <div
+      v-for="(character, index) in characters"
+      :key="character.id"
+      :ref="el => (charRefs[index] = el)"
+      class="profile__character-item"
+    >
+      <img
+        :src="character.image"
+        :alt="character.name"
+        :ref="el => (imgRefs[index] = el)"
+        class="profile__img"
+      />
+      <p class="profile__quote">{{ character.quote }}</p>
+    </div>
+  </section>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, nextTick, computed } from 'vue'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useLandingPageStore } from '@/stores/landingPage'
-import cardBg from '@/assets/card-bg.png'
-
-const { profileData } = useLandingPageStore()
-const flippedMap = ref(Object.fromEntries(profileData.map(item => [item.id, false])))
-const characters_front = computed(() =>
-  profileData.filter(item => item.type === 'drama').sort((a, b) => a.order - b.order)
-)
-const characters_back = computed(() =>
-  profileData.filter(item => item.type === 'reality').sort((a, b) => a.order - b.order)
-)
+<script setup>
+import { ref, onMounted, nextTick } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const profileRef = ref(null)
-const cardGroupRef = ref(null)
+import A from '@/assets/characters/1.png'
+import B from '@/assets/characters/2.png'
+import C from '@/assets/characters/3.png'
+import D from '@/assets/characters/4.png'
+import E from '@/assets/characters/5.png'
+import F from '@/assets/characters/6.png'
+import G from '@/assets/characters/7.png'
+import H from '@/assets/characters/8.png'
+import I from '@/assets/characters/9.png'
+import J from '@/assets/characters/10.png'
+import K from '@/assets/characters/11.png'
+import L from '@/assets/characters/12.png'
+import M from '@/assets/characters/13.png'
 
-const handleAnimation = () => {
-  const cards = cardGroupRef.value.querySelectorAll('.profile__card')
+const characters = [
+  { id: 1, name: 'A', image: A, quote: '我一直都在努力活成值得被喜歡的樣子' },
+  { id: 2, name: 'B', image: B, quote: '其實我一直都知道你不喜歡我' },
+  { id: 3, name: 'C', image: C, quote: '每個音符，都是我想說卻不敢說的話' },
+  { id: 4, name: 'D', image: D, quote: '你可以看不起我，但不能阻止我' },
+  { id: 5, name: 'E', image: E, quote: '如果重來一次，我會勇敢說不要' },
+  { id: 6, name: 'F', image: F, quote: '我不再為了被接納而討好所有人' },
+  { id: 7, name: 'G', image: G, quote: '我不是弱，只是不想裝堅強了' },
+  { id: 8, name: 'H', image: H, quote: '那天我沉默，不代表我不在乎' },
+  { id: 9, name: 'I', image: I, quote: '我只是累了，不想再說服誰了' },
+  { id: 10, name: 'J', image: J, quote: '我笑，是因為我怕哭' },
+  { id: 11, name: 'K', image: K, quote: '我不完美，但我值得被愛' },
+  { id: 12, name: 'L', image: L, quote: '你沒錯，我也沒錯，我們只是不同' },
+  { id: 13, name: 'M', image: M, quote: '謝謝你讓我知道，溫柔不是軟弱' },
+]
 
-  cards.forEach((card, i) => {
-    gsap.from(card, {
-      x: i % 2 === 0 ? -100 : 100,
-      y: 50,
-      opacity: 0,
-      scale: 0.8,
-      duration: 3,
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 80%',
-        end: 'top 40%',
-        scrub: true,
-      },
-    })
-  })
-}
-
-const handleFlipped = (id: string) => {
-  flippedMap.value[id] = !flippedMap.value[id]
-}
+const charRefs = ref([])
+const imgRefs = ref([])
 
 onMounted(async () => {
-  handleAnimation()
+  imgRefs.value.forEach((img, index) => {
+    const fromX = index % 2 === 0 ? -100 : 100
+
+    gsap.fromTo(
+      img,
+      { x: fromX, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: charRefs.value[index],
+          start: 'top 80%',
+          end: 'top 30%',
+          scrub: true,
+        },
+      }
+    )
+  })
 })
 </script>
 
 <style scoped>
-.profile-page {
-  width: 100%;
-  min-height: 100vh;
-  /* background-color: #fbf6ff; */
-}
-
 .profile {
-  min-height: 100vh;
-  padding: 4rem;
+  padding: 1rem;
 }
 
-.profile__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.profile__card {
-  width: 90%;
-  max-width: 700px;
-  height: 700px;
-  perspective: 1500px;
-  border-radius: 10px;
-}
-
-.profile__card-inner {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  position: relative;
-  cursor: pointer;
-}
-
-.profile__card-inner--flipped {
-  transform: rotateY(-180deg);
-}
-
-.profile__face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  top: 0;
-  left: 0;
-  border-radius: 12px;
-  overflow: hidden;
+.profile__character-item {
+  padding: 1rem;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-
-  background-size: cover; /* 覆蓋整個卡片 */
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.profile__face--front {
-  background-image: url('@/assets/card-bg.png');
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  z-index: 2;
-}
-
-.profile__face--back {
-  background-image: url('@/assets/card-bg2.png');
-  /* background-color: rgba(255, 255, 255, -0.8); */
-  transform: rotateY(-180deg);
-  z-index: 1;
-}
-
-.profile__image {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.profile__name {
-  padding-top: 1rem;
   text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
 }
 
-.profile__content {
-  width: 100%;
-  text-align: left;
-  font-size: 1rem;
+.profile__img {
+  width: 60%;
+  max-height: 100%;
+  object-fit: cover;
+  opacity: 0;
 }
 
-@media screen and (max-width: 600px) {
-  .profile__card {
-    height: 500px;
-  }
-
-  .profile__image {
-    height: 300px;
-  }
+.profile__quote {
+  padding: 1rem;
+  font-size: 30px;
+  color: gray;
 }
 </style>

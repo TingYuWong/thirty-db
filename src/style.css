@@ -2,11 +2,15 @@
 
 @import 'modern-css-reset' layer(reset);
 
+@import url('https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:ital,wght@0,200..900;1,200..900&display=swap');
+
 @layer theme {
   :root {
     /* 粉紫及粉紅 */
     --brand-color: rgb(255, 87, 112);
     --brand-color-hover: rgb(221, 61, 85);
+    font-family: 'Chiron Sung HK', serif;
+    font-optical-sizing: auto;
   }
 
   /* body {
@@ -35,23 +39,6 @@
   } */
 
   body {
-    background-image: url('@/assets/bg2.png');
-    background-size: cover; /* 讓背景圖覆蓋整個畫面 */
-    background-repeat: no-repeat; /* 不要重複 */
-    background-attachment: fixed; /* 滾動時背景固定（視覺更穩） */
-    background-position: center top; /* 對齊位置 */
-  }
-
-  @keyframes bgMove {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 }
 

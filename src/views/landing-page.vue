@@ -11,24 +11,24 @@
 import { ref, onMounted } from 'vue'
 import HeroSection from '@/components/landing-page/hero-section.vue'
 import Profile from '@/components/landing-page/profiles.vue'
-import SpecialThanks from '@/components/landing-page/special-thanks.vue'
+// import SpecialThanks from '@/components/landing-page/special-thanks.vue'
 import Quotes from '@/components/landing-page/quotes.vue'
 import RollCard from '@/components/landing-page/roll-card.vue'
 import DataSpeed from '@/components/landing-page/data-speed.vue'
 import DbPath from '@/components/landing-page/db-path.vue'
-import Comic from '@/components/landing-page/comic.vue'
+// import Comic from '@/components/landing-page/comic.vue'
 import Loading from '@/components/landing-page/loading.vue'
 
 import { useLandingPageStore } from '@/stores/landingPage'
 
 const sections = [
   { component: HeroSection },
-  { component: Profile },
   { component: DbPath },
+  { component: Profile },
   { component: Quotes },
+  // { component: SpecialThanks },
+  // { component: Comic },
   { component: DataSpeed },
-  { component: SpecialThanks },
-  { component: Comic },
   { component: RollCard },
 ]
 
