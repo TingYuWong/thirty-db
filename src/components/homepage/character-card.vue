@@ -135,7 +135,7 @@ onBeforeUnmount(() => {
 }
 
 /* 手機版 */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .character-card {
     flex-direction: column;
     text-align: center;
@@ -148,6 +148,17 @@ onBeforeUnmount(() => {
 
   .character-info {
     max-width: 70%;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .character-image {
+    width: 25%;
+    max-width: 25%;
+  }
+
+  .character-info {
+    max-width: 30%;
   }
 }
 </style>
