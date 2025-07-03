@@ -1,9 +1,9 @@
 <template>
-  <Transition name="fade" mode="out-in">
-    <div class="fullscreen">
+  <div class="fullscreen">
+    <Transition name="fade" mode="out-in">
       <component :is="activeComponent" :key="currentStep" @next-section="handleNextSection" />
-    </div>
-  </Transition>
+    </Transition>
+  </div>
 </template>
 
 <script setup lang="ts">
