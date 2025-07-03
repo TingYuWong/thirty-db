@@ -20,6 +20,10 @@
     background-blend-mode: color-dodge;
     overflow: hidden;
   }
+
+  .fullscreen {
+    height: calc(var(--vh, 1vh) * 100);
+  }
 }
 
 /* 元件樣式或 utility 再放 components layer */

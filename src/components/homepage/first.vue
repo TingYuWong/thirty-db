@@ -46,7 +46,7 @@ onMounted(() => {
 <style scoped>
 .intro-container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background:
     radial-gradient(129% 99% at 112% 85%, rgb(223, 220, 255) 20%, rgb(255, 158, 194) 90%),
     url('@/assets/noise.png');

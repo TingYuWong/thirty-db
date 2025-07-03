@@ -1,6 +1,8 @@
 <template>
   <Transition name="fade" mode="out-in">
-    <component :is="activeComponent" :key="currentStep" @next-section="handleNextSection" />
+    <div class="fullscreen">
+      <component :is="activeComponent" :key="currentStep" @next-section="handleNextSection" />
+    </div>
   </Transition>
 </template>
 

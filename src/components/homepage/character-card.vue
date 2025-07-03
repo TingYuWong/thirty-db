@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 

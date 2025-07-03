@@ -110,7 +110,7 @@ onMounted(() => {
     url('@/assets/noise.png');
   background-blend-mode: color-dodge;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 </style>

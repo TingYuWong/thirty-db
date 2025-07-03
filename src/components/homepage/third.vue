@@ -135,7 +135,7 @@ const handleClick = event => {
   gap: 2rem;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   cursor: pointer;
   user-select: none;
   outline: none;
