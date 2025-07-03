@@ -12,9 +12,11 @@ export function useViewportHeight() {
   onMounted(() => {
     setVH()
     window.addEventListener('resize', setVH)
+    window.addEventListener('orientationchange', setVH)
   })
 
   onBeforeUnmount(() => {
     window.removeEventListener('resize', setVH)
+    window.removeEventListener('orientationchange', setVH)
   })
 }
