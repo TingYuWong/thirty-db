@@ -15,7 +15,7 @@ import Second from '@/components/homepage/second.vue'
 import Third from '@/components/homepage/third.vue'
 import Fourth from '@/components/homepage/fourth.vue'
 
-const currentStep = ref(1)
+const currentStep = ref(2)
 
 const handleNextSection = () => {
   currentStep.value++
