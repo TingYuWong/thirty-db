@@ -1,6 +1,7 @@
 <template>
   <div class="character-wrap">
     <CharacterCard
+      @next-image="handleAnimation"
       :key="currentItem.name"
       :image="currentItem.image"
       :name="currentItem.name"
@@ -22,11 +23,19 @@ import Guardian from '@/assets/characters/6.png'
 import Summer from '@/assets/characters/5.png'
 import Ex from '@/assets/characters/3.png'
 import BadFriend from '@/assets/characters/2.png'
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const emit = defineEmits<{
   (e: 'next-section'): void
 }>()
+
+const handleAnimation = () => {
+  if (index.value >= characters.length - 1) {
+    emit('next-section')
+    return
+  }
+  index.value++
+}
 
 const femaleLead = [MooChanOne, MooChanTwo]
 
@@ -85,18 +94,6 @@ const characters = [
 
 const index = ref(0)
 const currentItem = computed(() => characters[index.value])
-let intervalTimer = null
-
-onMounted(() => {
-  intervalTimer = setInterval(() => {
-    if (index.value >= characters.length - 1) {
-      clearInterval(intervalTimer)
-      emit('next-section')
-      return
-    }
-    index.value++
-  }, 6500)
-})
 </script>
 
 <style scoped>

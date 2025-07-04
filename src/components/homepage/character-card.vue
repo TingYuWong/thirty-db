@@ -1,17 +1,31 @@
 <template>
   <div class="character-card" ref="cardRef">
-    <img :src="image" :alt="name" class="character-image" />
-    <div class="character-info">
+    <img
+      :src="image"
+      :alt="name"
+      class="character-image"
+      :class="{ 'character__image--visible': imgLoaded }"
+      @load="handleImageLoading"
+    />
+    <div v-if="imgLoaded" class="character-info">
       <h2 class="character-name" ref="nameRef">{{ name }}</h2>
       <p class="character-description" ref="descriptionRef">{{ description }}</p>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
+
+const emit = defineEmits<{
+  (e: 'next-image'): void
+}>()
+
+const handleImageLoading = () => {
+  imgLoaded.value = true
+}
 
 gsap.registerPlugin(SplitText)
 
@@ -21,6 +35,7 @@ const props = defineProps({
   description: String,
 })
 
+const imgLoaded = ref(false)
 const cardRef = ref(null)
 const nameRef = ref(null)
 const descriptionRef = ref(null)
@@ -83,18 +98,23 @@ const playAnimation = async () => {
       opacity: 0,
       duration: 1,
       ease: 'power2.inOut',
+      onComplete: () => {
+        imgLoaded.value = false
+        emit('next-image')
+      },
     },
     '+=0.1'
   )
 }
 
 watch(
-  () => props.image,
+  () => imgLoaded.value,
   () => {
-    playAnimation()
-  },
-  { immediate: true }
-) // 頁面初次也會跑一次
+    if (imgLoaded.value) {
+      playAnimation()
+    }
+  }
+)
 
 onBeforeUnmount(() => {
   cleanup()
@@ -116,6 +136,11 @@ onBeforeUnmount(() => {
   max-width: 45vw;
   border-radius: 1rem;
   object-fit: cover;
+  visibility: hidden;
+}
+
+.character__image--visible {
+  visibility: visible;
 }
 
 .character-info {
