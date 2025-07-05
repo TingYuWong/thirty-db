@@ -112,6 +112,13 @@ onMounted(() => {
     autoplay: false,
     path: 'https://lottie.host/ab6ca04b-3bf2-463f-a711-c59fbca19d58/qZmmhQLaGA.json',
   })
+
+  gsap.to(lottieContainer.value, {
+    opacity: 1,
+    duration: 1.2,
+    ease: 'power2.out',
+  })
+
   animationInstance.goToAndStop(0, true)
 })
 
