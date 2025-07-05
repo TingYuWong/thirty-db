@@ -41,7 +41,6 @@ const quoteThreeEl = ref(null)
 const keyword = ref(keywords[Math.floor(Math.random() * keywords.length)])
 
 const decoysEl = ref(null)
-const emit = defineEmits(['done'])
 
 let splitInstances = []
 let timeline
@@ -100,6 +99,7 @@ const playIntro = () => {
         rotation: randomInteger(-60, 60),
         x: randomInteger(-350, 350),
         y: randomInteger(60, 200),
+        opacity: 1,
         autoAlpha: 1,
         ease: 'power2.out',
         startAt: {
